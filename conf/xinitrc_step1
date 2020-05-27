@@ -1,0 +1,24 @@
+#!/bin/sh
+#####################################################################
+#
+# ______          __          _   _____       _     
+# | ___ \        / _|        | | /  __ \     | |    
+# | |_/ /__ _ __| |_ ___  ___| |_| /  \/ __ _| |__  
+# |  __/ _ \ '__|  _/ _ \/ __| __| |    / _` | '_ \ 
+# | | |  __/ |  | ||  __/ (__| |_| \__/\ (_| | |_) |
+# \_|  \___|_|  |_| \___|\___|\__|\____/\__,_|_.__/ 
+#								    
+#								    
+# - Author: Nicola Damonti			                    
+# - Name: xinitrc_step1.sh			                    
+# - Release under license: GPLv3	                            
+#								    
+# - Description: 				                    
+#								    
+#  First version of xinitrc - run attract mode with default monitor resolution
+#								    
+#####################################################################
+
+
+/usr/bin/xset s off -dpms 
+exec openbox-session

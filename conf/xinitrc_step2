@@ -1,0 +1,59 @@
+#!/bin/sh
+#####################################################################
+#
+# ______          __          _   _____       _     
+# | ___ \        / _|        | | /  __ \     | |    
+# | |_/ /__ _ __| |_ ___  ___| |_| /  \/ __ _| |__  
+# |  __/ _ \ '__|  _/ _ \/ __| __| |    / _` | '_ \ 
+# | | |  __/ |  | ||  __/ (__| |_| \__/\ (_| | |_) |
+# \_|  \___|_|  |_| \___|\___|\__|\____/\__,_|_.__/ 
+#								    
+#								    
+# - Author: Nicola Damonti			                    
+# - Name: xinitrc_step2.sh			                    
+# - Release under license: GPLv3	                            
+#								    
+# - Description: 				                    
+#								    
+#  Second version of xinitrc - run attract mode and loading modelines
+#  for native resolution
+#								    
+#####################################################################
+
+# DETECT VIDEOCARD NAME
+VIDEOCARDNAME=`xrandr | grep -w connected | /usr/bin/awk '{print $1}'`
+xrandr --output $VIDEOCARDNAME --mode "default"
+
+
+####### START MODELINE DEFINITION ###############
+
+# 640x480i - default resolution
+xrandr --newmode "default" 13.230000 640 672 736 840 480 484 490 525 -HSync -VSync interlace
+xrandr --newmode "256x224"   4.900   	     256 257 280 312   224 236 239 262  -hsync -vsync
+xrandr --newmode "400x254" 7.758 400 412 448 496 254 264 266 294  -hsync -vsync
+xrandr --newmode "320x224"   6.414   320 336 360 408   224 236 240 262  -hsync -vsync
+xrandr --newmode "384x224"   7.640   384 400 432 488   224 234 237 262  -hsync -vsync
+xrandr --newmode "288x224"   5.766   288 296 320 368   224 234 237 262  -hsync -vsync
+xrandr --newmode "320x240"   6.407   320 328 352 408   240 245 249 262  -hsync -vsync
+
+xrandr --addmode $VIDEOCARDNAME "default"
+xrandr --addmode $VIDEOCARDNAME "256x224"
+xrandr --addmode $VIDEOCARDNAME "400x254"
+xrandr --addmode $VIDEOCARDNAME "320x224"
+xrandr --addmode $VIDEOCARDNAME "384x224"
+xrandr --addmode $VIDEOCARDNAME "288x224"
+xrandr --addmode $VIDEOCARDNAME "320x240"
+
+####### END MODELINE DEFINITION ###############
+
+
+/usr/bin/xset s off -dpms 
+
+exec openbox-session
+
+#/usr/bin/xbindkeys -f /home/user/.xbindkeysrc
+#/usr/bin/xsetroot -cursor /usr/local/bin/emptycursor.xbm /usr/local/bin/emptycursor.xbm
+#/usr/games/mame  -verbose -nomouse -nojoystick /media/windows/Users/Nicola/Documents/roms/mame/roms/mk2r31e.zip
+#/usr/local/bin/start_game.sh /media/windows/Users/Nicola/Documents/roms/mame/roms/bublboblr.zip
+#xterm  -geometry  +1+1  -n  login  -display  :0
+
