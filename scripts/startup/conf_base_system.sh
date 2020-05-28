@@ -105,6 +105,7 @@ echo $PASSWORD | sudo -S git clone http://github.com/mickelson/attract attract
 cd attract/
 echo $PASSWORD | sudo -S make -j $(cat /proc/cpuinfo | grep -c processor)
 echo $PASSWORD | sudo -S make install
+echo $PASSWORD | sudo -S mkdir /usr/local/share/attract/romlists/
 echo $PASSWORD | sudo -S chown -R user.user /usr/local/share/attract/
 
 # Install Cosmo Themes
