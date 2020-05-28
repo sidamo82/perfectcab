@@ -142,7 +142,7 @@ echo $PASSWORD | sudo -S chown user.user /usr/local/etc/xinitrc
 echo $PASSWORD | sudo -S cp -f openbox/autostart /etc/xdg/openbox
 
 echo "---- COPY SAMBA CREDENTIALS FILE"
-cd /usr/local/src/perfectcab/etc/samba
+cd /usr/local/src/perfectcab/conf/etc/samba
 echo $PASSWORD | sudo -S cp -f credentials.txt /etc/samba
 echo $PASSWORD | sudo -S chown user.user /etc/samba/credentials.txt
 
