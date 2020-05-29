@@ -131,6 +131,17 @@ cd /usr/local/src/perfectcab
 echo $PASSWORD | sudo -S cp -f conf/mame/mame.ini /etc/mame/
 echo $PASSWORD | sudo -S cp -f conf/mame/uismall.bdf /etc/mame/
 
+# Install lrmc
+echo "---- INSTALL LRMC"
+echo $PASSWORD | cd /usr/local/src/perfectcab/software
+echo $PASSWORD | sudo -S tar xzvf lrmc-0.9.2.tar.gz
+echo $PASSWORD | sudo -S cd lrmc-0.9.2/
+echo $PASSWORD | sudo -S ./configure --prefix=/usr/local
+echo $PASSWORD | sudo -S make
+echo $PASSWORD | sudo -S make install
+echo $PASSWORD | sudo -S cd ..
+echo $PASSWORD | sudo -S rm -rf lrmc-0.9.2/
+
 # Copy StartUp scripts
 echo "---- COPY STARTUP SCRIPTS"
 cd /usr/local/src/perfectcab/conf
