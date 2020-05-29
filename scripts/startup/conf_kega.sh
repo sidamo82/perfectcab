@@ -39,7 +39,7 @@ fi
 echo "---- INSTALL KEGA"
 echo $PASSWORD | sudo -S dpkg --add-architecture i386
 echo $PASSWORD | sudo -S sudo apt-get update
-echo $PASSWORD | sudo -S sudo apt install libglu1-mesa:i386 libsm6:i386 libgtk2.0-0:i386 libasound2:i386 libasound2-plugins:i386 libmpg123-0:i386 gtk2-engines-murrine:i386 gtk2-engines-pixbuf:i386
+echo $PASSWORD | sudo -S sudo apt -y install libglu1-mesa:i386 libsm6:i386 libgtk2.0-0:i386 libasound2:i386 libasound2-plugins:i386 libmpg123-0:i386 gtk2-engines-murrine:i386 gtk2-engines-pixbuf:i386
 cd /usr/local/src/perfectcab/software
 echo $PASSWORD | sudo -S sudo dpkg -i kega-fusion_3.63-2_i386.deb
 
