@@ -64,7 +64,7 @@ esac
 $DAPHNE_BIN $1 vldp \
 $FASTBOOT \
 $FULLSCREEN \
--framefile $DAPHNE_SHARE/framefile/$1.txt \
+-framefile $DAPHNE_SHARE/mpeg2/$1/$1.txt \
 -homedir $DAPHNE_SHARE \
 -datadir $DAPHNE_SHARE \
 -blank_searches \
