@@ -23,3 +23,32 @@ More information on official site: https://perfectcab.org
 - Frontend based on AttractMode project
 - Lightweight graphical environment: OpenBox Windows Manager is used  for manage graphical enviroment, no desktop manager are configured (like GNOME, KDE, etc…). This improves both performance and booting time
 - NAS support: Optionally you can store your ROMs on external NAS (Synology / QNAP / etc…)
+
+# RELEASE NOTES
+
+
+
+## Version 1.0.2 (xxxx-xx-xx)
+
+- Replace Mame 0.221 with GroovyMame 0.221 to implement autoswitch resolution for all games
+
+- Vertical resolution games managed with autoswitch features of GroovyMame
+
+- Daphne integration finished: now is possible to play with laserdisc games!
+
+- Kega Fusion integration finished: now is possible to play with Sega Master System / Genesis / 32x games!
+
+- Remove "cache --refresh" from scraping scripts
+
+- Fix Daphne scripts
+
+  
+
+## Version 1.0.1 (2020-05-29)
+
+- Install lrmc utility
+- fix mame/neogeo scraping scripts
+
+## Version 1.0.0 (2020-05-28)
+
+- Initial release: Mame emulator works 100%
