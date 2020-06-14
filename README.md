@@ -40,7 +40,9 @@ More information on official site: https://perfectcab.org
 
 - Remove "cache --refresh" from scraping scripts
 
-- Fix Daphne scripts
+- Fix AttractMode History.dat Plugin
+
+- Create AttractMode ShowIpAddress Plugin
 
   
 
