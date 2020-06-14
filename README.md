@@ -44,6 +44,8 @@ More information on official site: https://perfectcab.org
 
 - Create AttractMode ShowIpAddress Plugin
 
+- Fix Font Size to better see game description on 15 Khz monitor on AttractMode Cosmo Templates
+
   
 
 ## Version 1.0.1 (2020-05-29)
