@@ -23,10 +23,11 @@ input=$1;
 
 echo $input;
 
-#xrandr --output VGA-0 --mode 256x192-sms-1
 xrandr --output VGA-0 --mode 320x240
 
-/usr/bin/amixer set Master 70%
+cp /home/user/.Kega\ Fusion/Fusion.sms.ini Fusion.ini
+
+/usr/bin/amixer set Master 0%
 
 sleep 1
 
@@ -36,11 +37,9 @@ else
 	/usr/games/kega-fusion -fullscreen "${input}"  
 	
 fi
-/usr/bin/amixer set Master 100%
+/usr/bin/amixer set Master 0%
 
 sleep 1
 
 xrandr --output VGA-0 --mode default
-
-
 

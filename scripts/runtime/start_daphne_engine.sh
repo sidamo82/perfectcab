@@ -9,6 +9,7 @@ function STDERR () {
 	/bin/cat - 1>&2
 }
 
+
 echo "Daphne Launcher : Script dir is $SCRIPT_DIR"
 cd "$SCRIPT_DIR"
 
@@ -19,6 +20,20 @@ if [ "$1" = "-fullscreen" ]; then
     FULLSCREEN="-fullscreen"
     shift
 fi
+
+gamename=$1
+gamedir=$1
+framefilename=$1
+
+echo "INPUT: $1"
+
+case "$1" in 
+	
+	dle11|dle21|laireuro|lair_a|lair_b|lair_c|lair_d|lair_e|lair_f)
+		gamedir='lair'
+		framefilename='lair'
+		;;
+esac
 
 if [ -z "$1" ] ; then
     echo "Specify a game to try: " | STDERR
@@ -60,11 +75,12 @@ case "$1" in
     *) VLDP_DIR="vldp"
 esac
 
+
 #strace -o strace.txt \
-$DAPHNE_BIN $1 vldp \
+$DAPHNE_BIN $gamename vldp \
 $FASTBOOT \
 $FULLSCREEN \
--framefile $DAPHNE_SHARE/mpeg2/$1/$1.txt \
+-framefile $DAPHNE_SHARE/mpeg2/$gamedir/$framefilename.txt \
 -homedir $DAPHNE_SHARE \
 -datadir $DAPHNE_SHARE \
 -blank_searches \

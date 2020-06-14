@@ -19,26 +19,34 @@
 #								    
 #####################################################################
 
-echo $input;
+input=$1
 
-#xrandr --output VGA-0 --mode 256x192-sms-1
-xrandr --output VGA-0 --mode 320x240
+cp /home/user/.Kega\ Fusion/Fusion.smd.ini Fusion.ini
 
-/usr/bin/amixer set Master 70%
+export DISPLAY=:0
 
-sleep 1
+# Get VideoCard name
+VIDEOCARDNAME=`xrandr | grep -w connected | /usr/bin/awk '{print $1}'`
 
-if [ "$input" = "snailmaze" ]; then
-	/usr/games/kega-fusion -fullscreen 
-else
-	/usr/games/kega-fusion -fullscreen "${input}"  
+# Switch Res
+echo "xrandr --output $VIDEOCARDNAME --mode 320x240" &> /tmp/kega_fusion_genesis_debug.txt
+xrandr --output $VIDEOCARDNAME --mode 320x240 &>> /tmp/kega_fusion_genesis_debug.txt
+
+# Change volume
+#/usr/bin/amixer set Master 70%  &>> /tmp/kega_fusion_genesis_debug.txt
+ 
+
+# Start Game
+echo "/usr/games/kega-fusion -fullscreen \"${input}\"" &>> /tmp/kega_fusion_genesis_debug.txt
+/usr/games/kega-fusion -fullscreen "${input}" &>> /tmp/kega_fusion_genesis_debug.txt
 	
-fi
-/usr/bin/amixer set Master 100%
 
-sleep 1
+#/usr/bin/amixer set Master 100% &>> /tmp/kega_fusion_genesis_debug.txt
+ 
+# Switch Res to Attract Mode
+echo "xrandr --output $VIDEOCARD --mode 640x480" &>> /tmp/kega_fusion_genesis_debug.txt
+xrandr --output $VIDEOCARD --mode 640x480 &>> /tmp/kega_fusion_genesis_debug.txt
 
-xrandr --output VGA-0 --mode default
 
 
 
