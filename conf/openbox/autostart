@@ -16,5 +16,6 @@
 #
 #xfce-mcs-manager &
 #
+#/usr/bin/xbindkeys -v -f /usr/local/etc/xbindkeysrc &
 /usr/local/bin/start_attract.sh 
 poweroff

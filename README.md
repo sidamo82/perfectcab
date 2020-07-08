@@ -46,6 +46,8 @@ More information on official site: https://perfectcab.org
 
 - Fix Font Size to better see game description on 15 Khz monitor on AttractMode Cosmo Templates
 
+- Disable openbox shortcut 
+
   
 
 ## Version 1.0.1 (2020-05-29)

@@ -67,7 +67,7 @@ function scan_for_ctrl_ln( f )
 
 function get_machine_information()
 {
-	local histf = file("/tmp/machineinfo.txt", "rb" );
+	local histf = file("/tmp/ipaddress.txt", "rb" );
 	local output = "";
 
 	while ( !histf.eos() )

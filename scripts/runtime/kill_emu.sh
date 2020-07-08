@@ -15,8 +15,10 @@
 #								    
 # - Description: 				                    
 #								    
-#  Command to close Kega Fusion                     
+#  Command to force closing of Emulators
 #								    
 #####################################################################
 
 killall Fusion
+killall bsnes
+killall -9 mame

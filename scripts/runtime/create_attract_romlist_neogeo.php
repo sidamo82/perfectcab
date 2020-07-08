@@ -93,6 +93,10 @@ try {
 		if(file_exists($sRomPath.'/'.trim($row['name']).'.zip')){
 			$bRomExist = true;
 		}
+		
+		if(file_exists($sRomPath.'/'.trim($row['name']).'.7z')){
+			$bRomExist = true;
+		}
 
 		if($bRomExist){
 
