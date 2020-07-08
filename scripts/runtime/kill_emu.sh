@@ -19,6 +19,11 @@
 #								    
 #####################################################################
 
-killall Fusion
-killall bsnes
-killall -9 mame
+# Kill Kega Fusion
+/usr/bin/killall Fusion
+# Kill Kega bsnes
+/usr/bin/killall bsnes
+# Kill mame
+/usr/bin/killall -9 mame
+# Kill Mesen
+/usr/bin/killall -9 cli
