@@ -10,7 +10,7 @@
 #								    
 #								    
 # - Author: Nicola Damonti			                    
-# - Name: scraping_mame.sh			                    
+# - Name: start_sms_kega.sh			                    		                    
 # - Release under license: GPLv3	                            
 #								    
 # - Description: 				                    
@@ -19,27 +19,32 @@
 #								    
 #####################################################################
 
-input=$1;
+export DISPLAY=:0
 
-echo $input;
+input=$1
 
-xrandr --output VGA-0 --mode 320x240
+# Start xbindkeys
+/usr/bin/xbindkeys -v -f /usr/local/etc/xbindkeysrc &
 
+# Copy Kega Fusion Config
 cp /home/user/.Kega\ Fusion/Fusion.sms.ini Fusion.ini
 
-/usr/bin/amixer set Master 0%
+# Switch Res
+echo "SWITCHRES: /usr/local/bin/switch_resolution.sh 320 240 60 polo" &> /tmp/kega_fusion_genesis_debug.txt
+/usr/local/bin/switch_resolution.sh 320 240 60 polo &>> /tmp/kega_fusion_genesis_debug.txt
 
-sleep 1
-
+# Start Game
 if [ "$input" = "snailmaze" ]; then
 	/usr/games/kega-fusion -fullscreen 
 else
 	/usr/games/kega-fusion -fullscreen "${input}"  
 	
 fi
-/usr/bin/amixer set Master 0%
 
-sleep 1
+# kill xbindkeys
+/usr/bin/killall -9 xbindkeys
 
-xrandr --output VGA-0 --mode default
+# Switch Res to Attract Mode
+echo "SWITCHRES: /usr/local/bin/switch_resolution.sh 640 480 60 polo" &>> /tmp/kega_fusion_genesis_debug.txt
+/usr/local/bin/switch_resolution.sh 640 480 60 polo &>> /tmp/kega_fusion_genesis_debug.txt
 

@@ -10,7 +10,7 @@
 #								    
 #								    
 # - Author: Nicola Damonti			                    
-# - Name: scraping_mame.sh			                    
+# - Name: start_genesis_kega.sh			                    
 # - Release under license: GPLv3	                            
 #								    
 # - Description: 				                    
@@ -19,33 +19,30 @@
 #								    
 #####################################################################
 
-input=$1
-
-cp /home/user/.Kega\ Fusion/Fusion.smd.ini Fusion.ini
-
 export DISPLAY=:0
 
-# Get VideoCard name
-VIDEOCARDNAME=`xrandr | grep -w connected | /usr/bin/awk '{print $1}'`
+input=$1
+
+# Start xbindkeys
+/usr/bin/xbindkeys -v -f /usr/local/etc/xbindkeysrc &
+
+# Copy Kega Fusion Config
+cp /home/user/.Kega\ Fusion/Fusion.smd.ini Fusion.ini
 
 # Switch Res
-echo "xrandr --output $VIDEOCARDNAME --mode 320x240" &> /tmp/kega_fusion_genesis_debug.txt
-xrandr --output $VIDEOCARDNAME --mode 320x240 &>> /tmp/kega_fusion_genesis_debug.txt
-
-# Change volume
-#/usr/bin/amixer set Master 70%  &>> /tmp/kega_fusion_genesis_debug.txt
- 
+echo "SWITCHRES: /usr/local/bin/switch_resolution.sh 320 240 60 polo" &> /tmp/kega_fusion_genesis_debug.txt
+/usr/local/bin/switch_resolution.sh 320 240 60 polo &>> /tmp/kega_fusion_genesis_debug.txt
 
 # Start Game
 echo "/usr/games/kega-fusion -fullscreen \"${input}\"" &>> /tmp/kega_fusion_genesis_debug.txt
 /usr/games/kega-fusion -fullscreen "${input}" &>> /tmp/kega_fusion_genesis_debug.txt
-	
 
-#/usr/bin/amixer set Master 100% &>> /tmp/kega_fusion_genesis_debug.txt
- 
+# kill xbindkeys
+/usr/bin/killall -9 xbindkeys
+
 # Switch Res to Attract Mode
-echo "xrandr --output $VIDEOCARD --mode 640x480" &>> /tmp/kega_fusion_genesis_debug.txt
-xrandr --output $VIDEOCARD --mode 640x480 &>> /tmp/kega_fusion_genesis_debug.txt
+echo "SWITCHRES: /usr/local/bin/switch_resolution.sh 640 480 60 polo" &>> /tmp/kega_fusion_genesis_debug.txt
+/usr/local/bin/switch_resolution.sh 640 480 60 polo &>> /tmp/kega_fusion_genesis_debug.txt
 
 
 

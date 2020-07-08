@@ -10,7 +10,7 @@
 #								    
 #								    
 # - Author: Nicola Damonti			                    
-# - Name: scraping_mame.sh			                    
+# - Name: start_32x_kega.sh			                    	                    
 # - Release under license: GPLv3	                            
 #								    
 # - Description: 				                    
@@ -19,28 +19,31 @@
 #								    
 #####################################################################
 
-input=$1;
+export DISPLAY=:0
 
-echo $input;
+input=$1
 
-#xrandr --output VGA-0 --mode 256x192-sms-1
-xrandr --output VGA-0 --mode 320x240
+# Start xbindkeys
+/usr/bin/xbindkeys -v -f /usr/local/etc/xbindkeysrc &
 
-/usr/bin/amixer set Master 70%
+# Copy Kega Fusion Config
+cp /home/user/.Kega\ Fusion/Fusion.smd.ini Fusion.ini
 
-sleep 1
+# Switch Res
+echo "SWITCHRES: /usr/local/bin/switch_resolution.sh 320 240 60 polo" &> /tmp/kega_fusion_32x_debug.txt
+/usr/local/bin/switch_resolution.sh 320 240 60 polo &>> /tmp/kega_fusion_32x_debug.txt
 
-if [ "$input" = "snailmaze" ]; then
-	/usr/games/kega-fusion -fullscreen 
-else
-	/usr/games/kega-fusion -fullscreen "${input}"  
-	
-fi
-/usr/bin/amixer set Master 100%
+# Start Game
+echo "/usr/games/kega-fusion -fullscreen \"${input}\"" &>> /tmp/kega_fusion_32x_debug.txt
+/usr/games/kega-fusion -fullscreen "${input}" &>> /tmp/kega_fusion_32x_debug.txt
 
-sleep 1
+# kill xbindkeys
+/usr/bin/killall -9 xbindkeys
 
-xrandr --output VGA-0 --mode default
+# Switch Res to Attract Mode
+echo "SWITCHRES: /usr/local/bin/switch_resolution.sh 640 480 60 polo" &>> /tmp/kega_fusion_32x_debug.txt
+/usr/local/bin/switch_resolution.sh 640 480 60 polo &>> /tmp/kega_fusion_32x_debug.txt
+
 
 
 

@@ -41,16 +41,17 @@ echo $PASSWORD | sudo -S apt -y install libsdl2-2.0 gnome-themes-standard
 # Install Mono
 echo $PASSWORD | sudo -S apt -y install gnupg ca-certificates
 echo $PASSWORD | sudo -S apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
-echo $PASSWORD | echo -S "deb https://download.mono-project.com/repo/ubuntu stable-bionic main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
+echo $PASSWORD | sudo -S cp /usr/local/src/perfectcab/conf/mesen/mono-official-stable.list /etc/apt/sources.list.d/
 echo $PASSWORD | sudo -S apt update
 echo $PASSWORD | sudo -S apt -y install mono-complete
 
 # Install MESEN
 echo "---- INSTALL MESEN"
 cd /tmp
-wget https://www.mesen.ca/download.php
-mv /tmp/download.php /tmp/Mesen.zip
-unzip /tmp/Mesen.zip
-mv /tmp/Mesen.exe /usr/games/
-chmod ugo+x /usr/games/Mesen.exe
+echo $PASSWORD | sudo -S wget https://www.mesen.ca/download.php
+echo $PASSWORD | sudo -S mv /tmp/download.php /tmp/Mesen.zip
+echo $PASSWORD | sudo -S unzip /tmp/Mesen.zip
+echo $PASSWORD | sudo -S mv /tmp/Mesen.exe /usr/games/
+echo $PASSWORD | sudo -S chmod ugo+x /usr/games/Mesen.exe
+
 
