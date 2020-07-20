@@ -402,34 +402,43 @@ if ( my_config["enable_pointer"] == "none")
 //add frame to make text standout 
 if ( my_config["enable_frame"] == "Yes" )
 {
-local frame = fe.add_image( "frame.png", 0, fly*0.94, flw, flh*0.06 );
+//local frame = fe.add_image( "frame.png", 0, fly*0.94, flw, flh*0.06 );
+local frame = fe.add_image( "frame.png", 0, fly*0.90, flw, flh*0.20 );
 frame.alpha = 255;
 }
 // Game information to show inside text box frame
 if ( my_config["enable_ginfo"] == "Yes" )
 {
 //Year text info
-local texty = fe.add_text("[Year]", flx*0.18, fly*0.942, flw*0.13, flh*0.05 );
+local texty = fe.add_text("[Year]", flx*0.18, fly*0.90, flw*0.13, flh*0.05 );
 texty.set_rgb( 255, 255, 255 );
 //texty.style = Style.Bold;
 //texty.align = Align.Left;
 
 //Title text info
 //local textt = fe.add_text( "[Title]", flx*0.315, fly*0.955, flw*0.6, flh*0.028  );
-local textt = fe.add_text( "[Title]", flx*0.30, fly*0.950, flw*0.75, flh*0.04  );
+local textt = fe.add_text( "[Title]", flx*0.30, fly*0.91, flw*0.75, flh*0.04  );
+
 textt.set_rgb( 225, 255, 255 );
 //textt.style = Style.Bold;
 textt.align = Align.Left;
 textt.rotation = 0;
 textt.word_wrap = true;
 
+
 //display filter info
-//local filter = fe.add_text( "[ListFilterName]: [ListEntry]-[ListSize]  [PlayedCount]", flx*0.7, fly*0.962, flw*0.3, flh*0.022 );
+//local filter = fe.add_text( "[ListFilterName]: [ListEntry]-[ListSize]  [PlayedCount]", flx*0.7, fly*0.90, flw*0.3, flh*0.022 );
 //filter.set_rgb( 255, 255, 255 );
 //filter.style = Style.Italic;
 //filter.align = Align.Right;
 //filter.rotation = 0;
 
+//Rom name info
+local textromname = fe.add_text( "[Name]", flx*0.30, fly*0.95, flw*0.75, flh*0.03  );
+textromname.set_rgb( 220, 220, 220 );
+textromname.align = Align.Left;
+textromname.rotation = 0;
+textromname.word_wrap = true;
 
 /////////////////////////////////////////////////////////
 // Genre logo
@@ -438,7 +447,7 @@ textt.word_wrap = true;
 
 //category icons 
 
-local glogo1 = fe.add_image("glogos/unknown1.png", flx*0.12, fly*0.945, flw*0.045, flh*0.05);
+local glogo1 = fe.add_image("glogos/unknown1.png", flx*0.12, fly*0.90, flw*0.045, flh*0.05);
 glogo1.preserve_aspect_ratio = true
 glogo1.trigger = Transition.EndNavigation;
 
@@ -515,7 +524,7 @@ GenreImage1(glogo1);
 //Game MFR Logos
 if ( my_config["enable_mlogos"] == "Yes")  
 {
-local mlogos = fe.add_image("mlogos/[Manufacturer]", flx*0.01, fly*0.945, flw*0.06, flh*0.05 );
+local mlogos = fe.add_image("mlogos/[Manufacturer]", flx*0.01, fly*0.90, flw*0.06, flh*0.05 );
 mlogos.preserve_aspect_ratio = true
 mlogos.trigger = Transition.EndNavigation;
 }		

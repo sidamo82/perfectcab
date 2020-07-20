@@ -30,16 +30,18 @@ class StartGame {
 
 	private $sXrandrExe = '/usr/bin/xrandr';
 	private $sMameExe = '/usr/games/mame';
+	private $sSwitchResExe = '/usr/local/bin/switch_resolution.sh';
 	#private $sMameExe = '/usr/local/bin/mame64';
 
 	private $bDebug = 'true';
 	private $sVGAName = '';
-
+	private $sMonitorType = '';
 	public $sPathGameName = '';
 	public $sFileGameName = '';
 	public $sGameName = '';
 
-	function __construct($sPathGameName, $sVGAName, $bDebug){	
+
+	function __construct($sPathGameName, $sVGAName, $sMonitorType, $bDebug){	
 
 		$this->sPathGameName = $sPathGameName;
 		$this->sFileGameName = basename($this->sPathGameName);
@@ -47,6 +49,7 @@ class StartGame {
 		$this->sGameName = $sTmp1;
 
 		$this->sVGAName=$sVGAName;
+		$this->sMonitorType=$sMonitorType;
 		$this->bDebug=$bDebug;
 
 		if($this->bDebug) {
@@ -54,13 +57,15 @@ class StartGame {
 			echo "\nBasename: ".$this->sFileGameName;
 			echo "\nName: ".$this->sGameName;
 			echo "\nVGAName: ".$this->sVGAName;
+			echo "\nMonitorType: ".$this->sMonitorType;
 		}
 	}
 
 
-	function changeResolution($sResolution){
+	function changeResolution($sWidth, $sHeight, $sVertRefresh){
 
-		$sCMDExec = $this->sXrandrExe." --output ".$this->sVGAName." --mode \"".$sResolution."\"";
+		$sCMDExec = $this->sSwitchResExe." ".$sWidth." ".$sHeight." ".$sVertRefresh." ".$this->sMonitorType;
+
 		$sOutput = '';
 		$sReturnStatus = '';
 
@@ -102,16 +107,25 @@ class StartGame {
 }
 
 $sSqlLiteDB = '/media/perfectcab/db/mame.db';
-$sAttractModeResolution = 'default';
-$sFallBackResolution = 'default';
 $sVGAName = '';
 $bDebug = true;
 
+
+$sFallBackResolution = '640x480x60';
+$sFallBackWidth = "640";
+$sFallBackHeight = "480";
+$sFallBackVertRefresh = "60";
+
+$sAttractModeResolution = '640x480x60';
+$sAttractModeWidth = "640";
+$sAttractModeHeight = "480";
+$sAttractModeVertRefresh = "60";
+
 $sVGAName = $argv[1];
 $sPathGameName = $argv[2];
+$sMonitorType = $argv[3];
 
-$oStartGame = new StartGame($sPathGameName, $sVGAName, $bDebug);
-
+$oStartGame = new StartGame($sPathGameName, $sVGAName, $sMonitorType, $bDebug);
 
 try {
 
@@ -127,7 +141,7 @@ try {
 			PDO::ERRMODE_EXCEPTION);
 
 
-	$sql = "SELECT display_width, display_height 
+	$sql = "SELECT display_width, display_height, display_refresh 
 		FROM mameroms 
 		WHERE
 		name=:name";
@@ -141,19 +155,24 @@ try {
 		while ($row = $stmt->fetch()) {
 			
 			$sResolution = $row['display_width']."x".$row['display_height'];
+			
+			$sWidth = $row['display_width'];
+			$sHeight = $row['display_height'];
+			$sVertRefresh = $row['display_refresh'];
 
+			
 			if($bDebug){
 				echo "\Change Resolution To Game Native Resolution";			
 			}
 
 			/* Change CRT Resolution */
-			if(!$oStartGame->changeResolution($sResolution))
+			if(!$oStartGame->changeResolution($sWidth, $sHeight, $sVertRefresh))
 			{	
 				if($bDebug){
 					echo "\nFailed To Change Resolution To Game Native Resolution - Try FallBack Resolution";			
 				}
 
-				$oStartGame->changeResolution($sFallBackResolution);
+				$oStartGame->changeResolution($sFallBackWidth, $sFallBackHeight, $sFallBackVertRefresh);
 			}
 			
 			sleep(2);
@@ -171,7 +190,7 @@ try {
 			sleep(2);
 
 			/* On game exit set AttractMode resolution */
-			$oStartGame->changeResolution($sAttractModeResolution);
+			$oStartGame->changeResolution($sAttractModeWidth, $sAttractModeHeight, $sAttractModeVertRefresh);
 
 
 		}

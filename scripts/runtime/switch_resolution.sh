@@ -1,7 +1,25 @@
 #!/bin/bash
+#####################################################################
+#
+# ______          __          _   _____       _     
+# | ___ \        / _|        | | /  __ \     | |    
+# | |_/ /__ _ __| |_ ___  ___| |_| /  \/ __ _| |__  
+# |  __/ _ \ '__|  _/ _ \/ __| __| |    / _` | '_ \ 
+# | | |  __/ |  | ||  __/ (__| |_| \__/\ (_| | |_) |
+# \_|  \___|_|  |_| \___|\___|\__|\____/\__,_|_.__/ 
+#								    
+#								    
+# - Author: Nicola Damonti			                    
+# - Name: switch_resolution.sh			                    
+# - Release under license: GPLv3	                            
+#								    
+# - Description: 				                    
+#								    
+#  Command to switch monitor resolution                   
+#								    
+#####################################################################
 
 export DISPLAY=:0
-
 
 switchres='/usr/local/bin/switchres';
 xrandr='/usr/bin/xrandr';

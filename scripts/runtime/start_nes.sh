@@ -10,12 +10,12 @@
 #								    
 #								    
 # - Author: Nicola Damonti			                    
-# - Name: scraping_mame.sh			                    
+# - Name: start_nes.sh			                    
 # - Release under license: GPLv3	                            
 #								    
 # - Description: 				                    
 #								    
-#  Command to start genesis Kega Fusion games                     
+#  Command to start nes games                     
 #								    
 #####################################################################
 

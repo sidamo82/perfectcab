@@ -23,4 +23,4 @@ export DISPLAY=:0
 
 VIDEOCARDNAME=`xrandr | grep -w connected | /usr/bin/awk '{print $1}'`
 
-/usr/bin/php /usr/local/bin/start_game.php $VIDEOCARDNAME $1 &> /tmp/mame_debug.txt
+/usr/bin/php /usr/local/bin/start_game.php $VIDEOCARDNAME $1 polo &> /tmp/mame_debug.txt
