@@ -131,6 +131,14 @@ cd /usr/local/src/perfectcab
 echo $PASSWORD | sudo -S cp -f conf/mame/mame.ini /etc/mame/
 echo $PASSWORD | sudo -S cp -f conf/mame/uismall.bdf /etc/mame/
 
+# Install SWITCHRES
+echo "---- INSTALL SWITCHRES"
+cd /usr/local/src/
+echo $PASSWORD | git clone  https://github.com/antonioginer/switchres.git
+cd /usr/local/src/switchres
+echo $PASSWORD | sudo -S /usr/bin/make
+echo $PASSWORD | cp switchres /usr/local/bin
+
 # Install lrmc
 echo "---- INSTALL LRMC"
 echo $PASSWORD | sudo chown -R user.user /usr/local/src/perfectcab/software
