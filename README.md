@@ -30,9 +30,9 @@ More information on official site: https://perfectcab.org
 
 ## Version 1.0.2 (xxxx-xx-xx)
 
-- Replace Mame 0.221 with GroovyMame 0.221 to implement autoswitch resolution for all games
+- Add auto switch resolution for all games
 
-- Vertical resolution games managed with autoswitch features of GroovyMame
+- Add support to choose best resolution for vertical games when used on horizontal monitor
 
 - Daphne integration finished: now is possible to play with laserdisc games!
 
