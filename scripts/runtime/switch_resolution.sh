@@ -1,25 +1,7 @@
 #!/bin/bash
-#####################################################################
-#
-# ______          __          _   _____       _     
-# | ___ \        / _|        | | /  __ \     | |    
-# | |_/ /__ _ __| |_ ___  ___| |_| /  \/ __ _| |__  
-# |  __/ _ \ '__|  _/ _ \/ __| __| |    / _` | '_ \ 
-# | | |  __/ |  | ||  __/ (__| |_| \__/\ (_| | |_) |
-# \_|  \___|_|  |_| \___|\___|\__|\____/\__,_|_.__/ 
-#								    
-#								    
-# - Author: Nicola Damonti			                    
-# - Name: switch_resolution.sh			                    
-# - Release under license: GPLv3	                            
-#								    
-# - Description: 				                    
-#								    
-#  Command to switch monitor resolution                   
-#								    
-#####################################################################
 
 export DISPLAY=:0
+
 
 switchres='/usr/local/bin/switchres';
 xrandr='/usr/bin/xrandr';
@@ -27,6 +9,8 @@ horizontalres=$1;
 verticalres=$2;
 verticalrefresh=$3;
 monitor=$4;
+rotate=$5;
+
 
 RESOLUTIONNAME="${horizontalres}x${verticalres}x${verticalrefresh}";
 
@@ -37,20 +21,28 @@ VIDEOCARDNAME=`$xrandr | grep -w connected | /usr/bin/awk '{print $1}'`
 
 
 #Calculate modeline
-echo "$switchres $horizontalres $verticalres $verticalrefresh --calc --monitor $4 | grep -i modeline | sed s/modeline//gi | awk '{$1=""}1'";
-MODELINE=`$switchres $horizontalres $verticalres $verticalrefresh --calc --monitor $4 | grep -i modeline | sed s/modeline//gi | awk '{$1=""}1'`;
+SWITCHRESCOMMAND="$switchres $horizontalres $verticalres $verticalrefresh --calc --monitor $4"
+
+if [ "$rotate" = "1" ]; then
+	echo "VERTICAL GAME DETECTED: CALCULATE CUSTOM RESOLUTION FOR HORIZONTAL SCREEN"
+	SWITCHRESCOMMAND="$SWITCHRESCOMMAND -r"
+fi
+
+echo "$SWITCHRESCOMMAND"
+MODELINE=`$SWITCHRESCOMMAND | grep -i modeline | sed s/modeline//gi | awk '{$1=""}1' | awk '{printf "%s %s %s %s %s %s %s %s %s %s %s %s", $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16}'`;
+MODELINENAME=`$SWITCHRESCOMMAND | grep -i modeline | sed s/modeline//gi | awk '{$1=""}1' | awk '{printf "%s %s %s", $1, $2, $3}'`;
 
 echo "MODELINE: $MODELINE";
+echo "MODELINENAME: $MODELINENAME";
 
 # ADD NEW MODLINE
-echo "$xrandr --newmode $RESOLUTIONNAME $MODELINE";
-$xrandr --newmode "$RESOLUTIONNAME" $MODELINE
+echo "$xrandr --newmode $MODELINENAME $MODELINE";
+$xrandr --newmode "$MODELINENAME" $MODELINE
 
-echo "$xrandr --addmode $VIDEOCARDNAME $RESOLUTIONNAME";
-$xrandr --addmode $VIDEOCARDNAME $RESOLUTIONNAME;
+echo "$xrandr --addmode $VIDEOCARDNAME $MODELINENAME";
+$xrandr --addmode $VIDEOCARDNAME "$MODELINENAME";
 
-# SWITCH MODELINE
-echo "$xrandr --output $VIDEOCARDNAME --mode $RESOLUTIONNAME";
-$xrandr --output $VIDEOCARDNAME --mode $RESOLUTIONNAME;
+echo "$xrandr --output $VIDEOCARDNAME --mode $MODELINENAME";
+$xrandr --output $VIDEOCARDNAME --mode "$MODELINENAME";
 
 exit 0;

@@ -62,9 +62,14 @@ class StartGame {
 	}
 
 
-	function changeResolution($sWidth, $sHeight, $sVertRefresh){
+	function changeResolution($sWidth, $sHeight, $sVertRefresh, $bVerticalGame=false){
 
-		$sCMDExec = $this->sSwitchResExe." ".$sWidth." ".$sHeight." ".$sVertRefresh." ".$this->sMonitorType;
+		$sVerticalGame=0;
+
+		if($bVerticalGame){
+			$sVerticalGame=1;
+		}
+		$sCMDExec = $this->sSwitchResExe." ".$sWidth." ".$sHeight." ".$sVertRefresh." ".$this->sMonitorType." ".$sVerticalGame;
 
 		$sOutput = '';
 		$sReturnStatus = '';
@@ -85,7 +90,8 @@ class StartGame {
 
 	function startGame($sResolution){
 
-		$sCMDExec = $this->sMameExe." -switchres -resolution ".$sResolution."  -keepaspect -waitvsync -verbose -skip_gameinfo ".$this->sPathGameName;
+		//$sCMDExec = $this->sMameExe." -switchres -resolution ".$sResolution."  -keepaspect -waitvsync -verbose -skip_gameinfo ".$this->sPathGameName;
+		$sCMDExec = $this->sMameExe." -keepaspect -waitvsync -verbose -skip_gameinfo ".$this->sPathGameName;
 		$sOutput = '';
 		$sReturnStatus = '';
 
@@ -141,7 +147,7 @@ try {
 			PDO::ERRMODE_EXCEPTION);
 
 
-	$sql = "SELECT display_width, display_height, display_refresh 
+	$sql = "SELECT display_width, display_height, display_refresh, display_rotate 
 		FROM mameroms 
 		WHERE
 		name=:name";
@@ -159,6 +165,13 @@ try {
 			$sWidth = $row['display_width'];
 			$sHeight = $row['display_height'];
 			$sVertRefresh = $row['display_refresh'];
+			$sRotate = $row['display_rotate'];
+
+			$bVerticalGame=false;
+
+			if($sRotate!='0'){
+				$bVerticalGame=true;
+			}
 
 			
 			if($bDebug){
@@ -166,7 +179,7 @@ try {
 			}
 
 			/* Change CRT Resolution */
-			if(!$oStartGame->changeResolution($sWidth, $sHeight, $sVertRefresh))
+			if(!$oStartGame->changeResolution($sWidth, $sHeight, $sVertRefresh, $bVerticalGame))
 			{	
 				if($bDebug){
 					echo "\nFailed To Change Resolution To Game Native Resolution - Try FallBack Resolution";			
