@@ -119,7 +119,7 @@ echo $PASSWORD | sudo -S cp -R * /usr/local/share/attract/layouts/
 cd ../menu-art/
 echo $PASSWORD | sudo -S cp -R snap/ /usr/local/share/attract/menu-art/
 cd /usr/local/src/perfectcab/conf/attract-configuration
-echo $PASSWORD | sudo -S cp -r attract.* emulators/ intro/ romlists/ screensaver/ layouts/ plugins/ /usr/local/share/attract/
+echo $PASSWORD | sudo -S cp -r attract.* emulators/ intro/ romlists/ screensaver/ layouts/ plugins/ history/ /usr/local/share/attract/
 echo $PASSWORD | sudo -S chown -R user.user /usr/local/share/attract/
 
 # Install Mame
