@@ -48,6 +48,8 @@ More information on official site: https://perfectcab.org
 
 - Disable openbox shortcut 
 
+- Add script to show static images (needed for monitor calibration)
+
   
 
 ## Version 1.0.1 (2020-05-29)
