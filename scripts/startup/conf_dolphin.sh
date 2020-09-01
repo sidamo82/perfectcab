@@ -38,20 +38,18 @@ fi
 # Install Daphne
 echo "---- INSTALL SUPERMODEL3"
 
-echo $PASSWORD | sudo -S add-apt-repository -y ppa:jonathonf/gcc-9.0
-echo $PASSWORD | sudo -S sudo apt-get -y update
-echo $PASSWORD | sudo -S sudo apt-get -y install gcc-9 g++-9
-echo $PASSWORD | sudo -S update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 1
-echo $PASSWORD | sudo -S update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 1
 
-echo $PASSWORD | sudo -S apt-get install -y build-essential libsdl1.2-dev libglew1.5-dev zlib1g-dev
+echo $PASSWORD | sudo -S update-alternatives --remove-all gcc
+echo $PASSWORD | sudo -S update-alternatives --remove-all g++
+echo $PASSWORD | sudo -S update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 1
+echo $PASSWORD | sudo -S update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-7 1
 
 
+echo $PASSWORD | sudo -S apt install -y --no-install-recommends ca-certificates qtbase5-dev qtbase5-private-dev git cmake make gcc g++ pkg-config libavcodec-dev libavformat-dev libavutil-dev libswscale-dev libxi-dev libxrandr-dev libudev-dev libevdev-dev libsfml-dev libminiupnpc-dev libmbedtls-dev libcurl4-openssl-dev libhidapi-dev libsystemd-dev libbluetooth-dev libasound2-dev libpulse-dev libpugixml-dev libbz2-dev libzstd-dev liblzo2-dev libpng-dev libusb-1.0-0-dev gettext
 cd /usr/local/src
-echo $PASSWORD | sudo -S git clone https://github.com/DSkywalk/supermodel3-custom.git
-cd supermodel3-custom/
-echo $PASSWORD | sudo -S ln -s Makefiles/Makefile.SDL.UNIX.GCC Makefile
-echo $PASSWORD | sudo -S make clean
+echo $PASSWORD | sudo -S git clone https://github.com/dolphin-emu/dolphin.git dolphin-emu
+cd dolphin-emu/
+echo $PASSWORD | sudo -S git checkout tags/5.0
+echo $PASSWORD | sudo -S mkdir Build && cd Build
+echo $PASSWORD | sudo -S cmake .. -DCMAKE_C_COMPILER=gcc-7 -DCMAKE_CXX_COMPILER=g++-7
 echo $PASSWORD | sudo -S make
-cd bin/
-echo $PASSWORD | sudo -S cp supermodel /usr/games/

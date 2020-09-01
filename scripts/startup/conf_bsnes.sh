@@ -35,11 +35,11 @@ else
     exit 1;
 fi
 
-secho $PASSWORD | sudo -S apt-get install build-essential libgtk2.0-dev libpulse-dev mesa-common-dev libgtksourceview2.0-dev libcairo2-dev libsdl1.2-dev libxv-dev libao-dev libopenal-dev libudev-dev libasound-dev
-cd /tmp
-git clone https://github.com/byuu/bsnes.git
+echo $PASSWORD | sudo -S apt-get install build-essential libgtk2.0-dev libpulse-dev mesa-common-dev libgtksourceview2.0-dev libcairo2-dev libsdl1.2-dev libxv-dev libao-dev libopenal-dev libudev-dev libasound-dev
+cd /usr/local/src
+echo $PASSWORD | sudo -S git clone https://github.com/byuu/bsnes.git
 cd bsnes/
-git checkout tags/v115
+echo $PASSWORD | sudo -S git checkout tags/v115
 cd bsnes/
-make bsnes
+echo $PASSWORD | sudo -S make
 
