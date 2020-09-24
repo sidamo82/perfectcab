@@ -50,8 +50,8 @@ echo $PASSWORD | sudo -S apt-get install -y build-essential libsdl1.2-dev libgle
 cd /usr/local/src
 echo $PASSWORD | sudo -S git clone https://github.com/DSkywalk/supermodel3-custom.git
 cd supermodel3-custom/
-echo $PASSWORD | sudo -S ln -s Makefiles/Makefile.SDL.UNIX.GCC Makefile
+echo $PASSWORD | sudo -S ln -s Makefiles/Makefile.UNIX Makefile
 echo $PASSWORD | sudo -S make clean
 echo $PASSWORD | sudo -S make
 cd bin/
-echo $PASSWORD | sudo -S cp supermodel /usr/games/
+echo $PASSWORD | sudo -S cp bin/supermodel /usr/games/
